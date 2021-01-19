@@ -1,0 +1,28 @@
+{
+  "name": "post-a-poem",
+  "version": "1.0.0",
+  "description": "A simple full stack app where anonymous users can submit poems",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon -e js,html,pug,json",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/qvistdev09/post-a-poem.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/qvistdev09/post-a-poem/issues"
+  },
+  "homepage": "https://github.com/qvistdev09/post-a-poem#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "pug": "^3.0.0"
+  }
+}
