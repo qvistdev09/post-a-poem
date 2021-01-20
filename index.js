@@ -19,11 +19,24 @@ Poem.init(
 })();
 
 const app = express();
+app.use(express.json());
+app.use(express.urlencoded());
 app.set("view engine", "pug");
 
 app.use(express.static("public"));
 
 app.get("/", async (req, res) => {
+  const poems = await Poem.findAll();
+  const parsedPoems = poems.map((poem) => poem.toJSON().content);
+  res.render("index", { poems: parsedPoems });
+});
+
+app.post("/", async (req, res) => {
+  const { poemBody } = req.body;
+  await Poem.create({
+    content: poemBody,
+    date: new Date().toString(),
+  });
   const poems = await Poem.findAll();
   const parsedPoems = poems.map((poem) => poem.toJSON().content);
   res.render("index", { poems: parsedPoems });

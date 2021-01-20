@@ -3,6 +3,10 @@ html(lang="en")
     head
         title Post a Poem
     body
+        form(action="/" method="POST")
+            label(for="poem") Poem Text
+            input(type="text" id="poem" name="poemBody")
+            input(type="submit" value="Submit")
         h1 This is the root
         div
             each val in poems
