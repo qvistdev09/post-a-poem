@@ -15,12 +15,7 @@ Poem.init(
 );
 
 (async () => {
-  try {
-    await sequelize.sync({ force: true });
-    console.log("Successfully synced");
-  } catch (error) {
-    console.error("Error connecting to database", error);
-  }
+  await sequelize.sync();
 })();
 
 const app = express();
@@ -28,8 +23,10 @@ app.set("view engine", "pug");
 
 app.use(express.static("public"));
 
-app.get("/", (req, res) => {
-  res.render("index", { poems: sampleData });
+app.get("/", async (req, res) => {
+  const poems = await Poem.findAll();
+  const parsedPoems = poems.map((poem) => poem.toJSON().content);
+  res.render("index", { poems: parsedPoems });
 });
 
 app.listen(3000, () => {
