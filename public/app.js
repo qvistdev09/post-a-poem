@@ -1,6 +1,23 @@
 console.log("File is loaded");
 const wordPalette = document.getElementById("word-palette");
 const composedPoem = document.getElementById("composed-poem");
+const submitBtn = document.getElementById("submit-poem-btn");
+
+const submitPoem = () => {
+  let poemString = "";
+  for (let word of composedPoem.children) {
+    poemString += " " + word.innerText;
+  }
+  poemString = poemString.slice(1);
+
+  fetch("/", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ poem: poemString }),
+  }).then(() => {
+    window.location.href = "/";
+  });
+};
 
 const addWord = button => {
   button.setAttribute("disabled", "true");
@@ -18,6 +35,8 @@ const removeWord = button => {
   correspondingAddButton.removeAttribute("disabled");
   composedPoem.removeChild(button);
 };
+
+submitBtn.addEventListener("click", submitPoem);
 
 const paletteWords = [
   "silence",

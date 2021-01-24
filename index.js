@@ -1,4 +1,5 @@
 const express = require("express");
+const bodyParser = require("body-parser");
 const sampleData = require("./sample-data/sample-poems.json");
 
 const Sequelize = require("sequelize");
@@ -29,7 +30,7 @@ Poem.init(
 })();
 
 const app = express();
-app.use(express.urlencoded());
+app.use(bodyParser.json());
 app.set("view engine", "pug");
 
 app.use(express.static("public"));
@@ -40,15 +41,15 @@ app.get("/", async (req, res) => {
   res.render("index", { poems: parsedPoems });
 });
 
-app.post("/", async (req, res) => {
-  const { poemBody } = req.body;
-  await Poem.create({
-    content: poemBody,
+app.post("/", (req, res) => {
+  console.log(req.body);
+  Poem.create({
+    content: req.body.poem,
     date: new Date().toString(),
+  }).then(() => {
+    console.log("callback works");
+    res.redirect("/");
   });
-  const poems = await Poem.findAll();
-  const parsedPoems = poems.map(poem => poem.toJSON().content);
-  res.render("index", { poems: parsedPoems });
 });
 
 app.listen(3000, () => {
