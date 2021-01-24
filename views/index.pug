@@ -3,12 +3,13 @@ html(lang="en")
     head
         title Post a Poem
     body
-        form(action="/" method="POST")
-            label(for="poem") Poem Text
-            input(type="text" id="poem" name="poemBody")
-            input(type="submit" value="Submit")
-        h1 This is the root
-        div
-            each val in poems
-                p= val
-        script(src='app.js')
+        div(id="root")
+            h1 10 word poem maker
+            div(id="word-palette")
+            div(id="composed-poem")
+            button(id="submit-poem-btn") Submit poem
+            h2 Submitted poems
+            div
+                each val in poems
+                    p= val
+            script(src='app.js')
