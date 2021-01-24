@@ -15,7 +15,17 @@ Poem.init(
 );
 
 (async () => {
-  await sequelize.sync();
+  await sequelize.sync({ force: true });
+
+  const testPoems = [
+    "This is a test poem",
+    "Another test poen",
+    "third test poem",
+  ];
+
+  for (let poem of testPoems) {
+    await Poem.create({ content: poem, date: new Date().toString() });
+  }
 })();
 
 const app = express();
@@ -26,7 +36,7 @@ app.use(express.static("public"));
 
 app.get("/", async (req, res) => {
   const poems = await Poem.findAll();
-  const parsedPoems = poems.map((poem) => poem.toJSON().content);
+  const parsedPoems = poems.map(poem => poem.toJSON().content);
   res.render("index", { poems: parsedPoems });
 });
 
@@ -37,7 +47,7 @@ app.post("/", async (req, res) => {
     date: new Date().toString(),
   });
   const poems = await Poem.findAll();
-  const parsedPoems = poems.map((poem) => poem.toJSON().content);
+  const parsedPoems = poems.map(poem => poem.toJSON().content);
   res.render("index", { poems: parsedPoems });
 });
 
