@@ -3,9 +3,34 @@ const wordPalette = document.getElementById("word-palette");
 const composedPoem = document.getElementById("composed-poem");
 const submitBtn = document.getElementById("submit-poem-btn");
 
+const makePoemWord = word => {
+  const container = document.createElement("div");
+  container.setAttribute("class", "word-div");
+
+  const poemWordBtn = document.createElement("button");
+  poemWordBtn.setAttribute("onclick", "removeWord(this)");
+  poemWordBtn.setAttribute("id", word + "-rm");
+  poemWordBtn.setAttribute("class", "poem-word");
+  poemWordBtn.innerText = word;
+
+  const connectorDiv = document.createElement("div");
+  connectorDiv.setAttribute("class", "connector-div");
+  const connectorLengthVariation = Math.floor(Math.random() * 101) / 100;
+  let connectorLength = 4 * connectorLengthVariation;
+  if (connectorLength < 0.3) {
+    connectorLength = 0.3;
+  }
+  connectorDiv.style.width = `${connectorLength}rem`;
+
+  container.appendChild(connectorDiv);
+  container.appendChild(poemWordBtn);
+
+  return container;
+};
+
 const submitPoem = () => {
   const wordArray = [];
-  for (let poemWord of document.getElementsByClassName('poem-word')) {
+  for (let poemWord of document.getElementsByClassName("poem-word")) {
     wordArray.push(poemWord.innerText);
   }
   const poemString = wordArray.join(" ");
@@ -22,11 +47,7 @@ const submitPoem = () => {
 const addWord = button => {
   button.setAttribute("disabled", "true");
 
-  const poemWordBtn = document.createElement("button");
-  poemWordBtn.innerText = button.innerText;
-  poemWordBtn.setAttribute("onclick", "removeWord(this)");
-  poemWordBtn.setAttribute("id", button.innerText + "-rm");
-  poemWordBtn.setAttribute("class", "poem-word");
+  const poemWordBtn = makePoemWord(button.innerText);
 
   const poemRows = composedPoem.getElementsByClassName("poem-row");
 
@@ -55,10 +76,12 @@ const removeWord = button => {
   );
   correspondingAddButton.removeAttribute("disabled");
 
-  if (button.parentElement.children.length === 1) {
-    button.parentElement.parentElement.removeChild(button.parentElement);
+  const currentRow = button.parentElement.parentElement;
+
+  if (currentRow.children.length === 1) {
+    currentRow.parentElement.removeChild(currentRow);
   } else {
-    button.parentElement.removeChild(button);
+    currentRow.removeChild(button.parentElement);
   }
 };
 

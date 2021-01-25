@@ -24,11 +24,36 @@
   border: 1px solid gray;
 }
 
+.poem-row {
+  display: flex;
+}
+
+.poem-row + .poem-row {
+  margin-top: 1rem;
+}
+
+.connector-div {
+  width: 2rem;
+  border-bottom: 1px solid black;
+  transform: translateY(-50%);
+  display: none;
+}
+
+.word-div {
+  display: flex;
+}
+
+.word-div + .word-div > .connector-div {
+  display: block;
+}
+
 button {
-  margin: 0.2rem;
   padding: 0.2rem;
 }
 
-.poem-row {
-  background-color: red;
+.poem-word {
+  border: none;
+  background-color: transparent;
+  border: 1px solid black;
+  border-radius: 0.25rem;
 }
