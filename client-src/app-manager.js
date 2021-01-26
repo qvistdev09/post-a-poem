@@ -1,4 +1,4 @@
-const { make } = require('./app-content');
+const { make } = require("./app-content");
 
 function AppManager(paletteDiv, poemDiv) {
   this.paletteDiv = paletteDiv;
@@ -7,31 +7,23 @@ function AppManager(paletteDiv, poemDiv) {
 
 AppManager.prototype.addWord = function (button) {
   button.setAttribute("disabled", "true");
-
   const poemWordBtn = make.poemWordBtn(button.innerText);
-
   const poemRows = this.poemDiv.getElementsByClassName("poem-row");
 
-  if (poemRows.length === 0) {
-    const newRow = make.newRow();
-    this.poemDiv.appendChild(newRow);
-    newRow.appendChild(poemWordBtn);
-  } else {
-    for (let row of poemRows) {
-      if (row.children.length < 3) {
-        row.appendChild(poemWordBtn);
-        return;
-      }
+  for (let row of poemRows) {
+    if (row.children.length < 3) {
+      row.appendChild(poemWordBtn);
+      return;
     }
-    const newRow = make.newRow();
-    this.poemDiv.appendChild(newRow);
-    newRow.appendChild(poemWordBtn);
   }
+  const newRow = make.newRow();
+  this.poemDiv.appendChild(newRow);
+  newRow.appendChild(poemWordBtn);
 };
 
 AppManager.prototype.removeWord = function (button) {
   const correspondingAddButton = document.getElementById(
-    button.getAttribute('data-word') + "-add"
+    button.getAttribute("data-word") + "-add"
   );
   correspondingAddButton.removeAttribute("disabled");
 
