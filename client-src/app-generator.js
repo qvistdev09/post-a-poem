@@ -35,6 +35,13 @@ const makePoemPaletteBtn = word => {
   return paletteBtn;
 };
 
+const makeNewRow = () => {
+  const newRow = document.createElement("div");
+  newRow.setAttribute("class", "poem-row");
+  newRow.style.marginLeft = `${randomize(5, 0)}rem`;
+  return newRow;
+};
+
 function AppGenerator(paletteDiv, poemDiv) {
   this.paletteDiv = paletteDiv;
   this.poemDiv = poemDiv;
@@ -48,8 +55,7 @@ AppGenerator.prototype.addWord = function (button) {
   const poemRows = this.poemDiv.getElementsByClassName("poem-row");
 
   if (poemRows.length === 0) {
-    const newRow = document.createElement("div");
-    newRow.setAttribute("class", "poem-row");
+    const newRow = makeNewRow();
     this.poemDiv.appendChild(newRow);
     newRow.appendChild(poemWordBtn);
   } else {
@@ -59,8 +65,7 @@ AppGenerator.prototype.addWord = function (button) {
         return;
       }
     }
-    const newRow = document.createElement("div");
-    newRow.setAttribute("class", "poem-row");
+    const newRow = makeNewRow();
     this.poemDiv.appendChild(newRow);
     newRow.appendChild(poemWordBtn);
   }
@@ -82,11 +87,11 @@ AppGenerator.prototype.removeWord = function (button) {
 };
 
 AppGenerator.prototype.generatePalette = function (wordArray) {
-    for (let word of wordArray) {
-        const paletteBtn = makePoemPaletteBtn(word);
-        this.paletteDiv.appendChild(paletteBtn);
-    }
-}
+  for (let word of wordArray) {
+    const paletteBtn = makePoemPaletteBtn(word);
+    this.paletteDiv.appendChild(paletteBtn);
+  }
+};
 
 AppGenerator.prototype.submitPoem = function () {
   const wordArray = [];
