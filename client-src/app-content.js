@@ -1,9 +1,10 @@
-const { randomize } = require('./app-functions');
+const { helpers } = require("./app-helpers");
 
 const make = {
   poemWordBtn: word => {
     const container = document.createElement("div");
     container.setAttribute("class", "word-div");
+    container.style.transform = `translateY(${helpers.randomInt(-15, 15)}%)`;
 
     const poemWordBtn = document.createElement("button");
     poemWordBtn.setAttribute("onclick", "removeWord(this)");
@@ -19,7 +20,7 @@ const make = {
 
     const connectorDiv = document.createElement("div");
     connectorDiv.setAttribute("class", "connector-div");
-    connectorDiv.style.width = `${randomize(4, 0.3)}rem`;
+    connectorDiv.style.width = `${helpers.randomize(4, 0.8)}rem`;
 
     container.appendChild(connectorDiv);
     container.appendChild(poemWordBtn);
@@ -38,7 +39,7 @@ const make = {
   newRow: () => {
     const newRow = document.createElement("div");
     newRow.setAttribute("class", "poem-row");
-    newRow.style.marginLeft = `${randomize(5, 0)}rem`;
+    newRow.style.marginLeft = `${helpers.randomize(5, 0)}rem`;
     return newRow;
   },
 };

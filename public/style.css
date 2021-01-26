@@ -69,12 +69,12 @@ h2.label span {
 }
 
 .poem-row + .poem-row {
-  margin-top: 1rem;
+  margin-top: 1.5rem;
 }
 
 .connector-div {
   width: 2rem;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid gray;
   transform: translateY(-50%);
   display: none;
 }
@@ -95,8 +95,9 @@ button {
   border: none;
   position: relative;
   background-color: transparent;
-  border: 1px solid black;
-  border-radius: 0.25rem;
+  border: 1px solid gray;
+  border-radius: 0.35rem;
+  padding: 0.35rem;
 }
 
 .close-icon {
