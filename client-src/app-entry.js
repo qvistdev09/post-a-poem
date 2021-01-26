@@ -107,3 +107,6 @@ for (let word of paletteWords) {
   wordButton.setAttribute("onclick", "addWord(this)");
   wordPalette.appendChild(wordButton);
 }
+
+window.addWord = addWord;
+window.removeWord = removeWord;
