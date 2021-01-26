@@ -5,6 +5,18 @@
   font-family: "Source Code Pro", monospace;
 }
 
+h1 {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+h2 {
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
 #root {
   padding: 0.5rem;
   max-width: 50rem;
@@ -14,14 +26,27 @@
   margin-top: 1rem;
 }
 
-#word-palette {
-  padding: 0.5rem;
+#submit-poem-btn {
+  border: none;
   border: 1px solid gray;
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+}
+
+#word-palette {
+  padding: 1rem;
+  border: 1px solid gray;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  border-radius: 0.5rem;
 }
 
 #composed-poem {
-  padding: 0.5rem;
+  padding: 1rem;
   border: 1px solid gray;
+  border-radius: 0.5rem;
 }
 
 .poem-row {
@@ -53,7 +78,31 @@ button {
 
 .poem-word {
   border: none;
+  position: relative;
   background-color: transparent;
+  border: 1px solid black;
+  border-radius: 0.25rem;
+}
+
+.close-icon {
+  display: none;
+  position: absolute;
+  background-color: white;
+  border-radius: 0.25rem;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+}
+
+.poem-word:hover .close-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.palette-btn {
+  margin: 0.4rem;
   border: 1px solid black;
   border-radius: 0.25rem;
 }

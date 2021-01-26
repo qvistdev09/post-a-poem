@@ -15,7 +15,13 @@ const makePoemWordBtn = word => {
   poemWordBtn.setAttribute("onclick", "removeWord(this)");
   poemWordBtn.setAttribute("id", word + "-rm");
   poemWordBtn.setAttribute("class", "poem-word");
+  poemWordBtn.setAttribute("data-word", word);
   poemWordBtn.innerText = word;
+
+  const closeIcon = document.createElement("p");
+  closeIcon.setAttribute("class", "close-icon");
+  closeIcon.textContent = "X";
+  poemWordBtn.appendChild(closeIcon);
 
   const connectorDiv = document.createElement("div");
   connectorDiv.setAttribute("class", "connector-div");
@@ -31,6 +37,8 @@ const makePoemPaletteBtn = word => {
   const paletteBtn = document.createElement("button");
   paletteBtn.innerText = word;
   paletteBtn.setAttribute("id", word + "-add");
+  paletteBtn.setAttribute("data-word", word);
+  paletteBtn.setAttribute("class", "palette-btn");
   paletteBtn.setAttribute("onclick", "addWord(this)");
   return paletteBtn;
 };
@@ -73,7 +81,7 @@ AppGenerator.prototype.addWord = function (button) {
 
 AppGenerator.prototype.removeWord = function (button) {
   const correspondingAddButton = document.getElementById(
-    button.innerText + "-add"
+    button.getAttribute('data-word') + "-add"
   );
   correspondingAddButton.removeAttribute("disabled");
 
