@@ -17,16 +17,6 @@ Poem.init(
 
 (async () => {
   await sequelize.sync({ force: true });
-
-  const testPoems = [
-    "This is a test poem",
-    "Another test poen",
-    "third test poem",
-  ];
-
-  for (let poem of testPoems) {
-    await Poem.create({ content: poem, date: new Date().toString() });
-  }
 })();
 
 const app = express();

@@ -10,13 +10,12 @@ html(lang="en")
             h1 10 word poem maker
             h2(class="label")
                 span Word Palette
-            div(id="word-palette")
+            div(id="word-palette" class="labelled-container")
             h2(class="label")
                 span Your Poem
-            div(id="composed-poem")
+            div(id="composed-poem" class="labelled-container")
             button(id="submit-poem-btn") Submit poem
-            h2 Submitted poems
-            div
-                each val in poems
-                    p= val
+            h2(class="label")
+                span Submitted Poems
+            div(id="submitted-poems" class="labelled-container")
             script(src='main.js')
