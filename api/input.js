@@ -1,5 +1,4 @@
-const validationRegex = /^((<([1-9]+([0-9]*|\.[0-9]+))>(\[[1-9]([0-9]*|[0-9]*\.[0-9]+);-{0,1}[1-9]([0-9]*|[0-9]*\.[0-9]+);[a-z]+\]){1,3})){1,4}$/;
-const separatorRegex = /(?<=\[)[a-z0-9.;]+(?=\])/g;
+const validationRegex = /^((<-{0,1}((0\.[0-9]+)|([1-9][0-9]*\.[0-9]+)|([1-9][0-9]*)|(0))>(\[-{0,1}((0\.[0-9]+)|([1-9][0-9]*\.[0-9]+)|([1-9][0-9]*)|(0));-{0,1}((0\.[0-9]+)|([1-9][0-9]*\.[0-9]+)|([1-9][0-9]*)|(0));[a-z]+\]){1,3})){1,4}$/;
 
 const makeWordObject = string => {
   const split = string.split(";");
@@ -19,11 +18,15 @@ const validate = string => {
 };
 
 const parse = validatedString => {
-  const rowMargins = validatedString.match(/(?<=<)[0-9]+(?=>)/g);
+  const rowMargins = validatedString.match(/(?<=<)[^<>]+(?=>)/g);
+  console.log(rowMargins + "---rowmargins");
   const rows = validatedString
-    .split(/<[0-9]+>/)
+    .split(/<[^<>]+>/)
     .filter(element => element !== "")
-    .map(element => element.match(separatorRegex));
+    .map(encodedRow => encodedRow.match(/(?<=\[)[^\[\]]+(?=\])/g))
+    .map(array => array.map(makeWordObject));
+
+  console.log(rows);
 
   if (rowMargins.length !== rows.length) {
     throw new Error(
@@ -31,12 +34,12 @@ const parse = validatedString => {
     );
   }
 
-  const parsedRows = rowMargins.map((rowMargin, index) => ({
-    margin: rowMargin,
-    words: rows[index].map(makeWordObject),
+  const poemRows = rows.map((wordRow, index) => ({
+    margin: rowMargins[index],
+    words: wordRow,
   }));
 
-  return parsedRows;
+  return { content: "Poem", rows: poemRows };
 };
 
 module.exports.parse = parse;
