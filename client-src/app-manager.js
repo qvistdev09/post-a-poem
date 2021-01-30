@@ -1,8 +1,9 @@
 const { make } = require("./app-content");
 
-function AppManager(paletteDiv, poemDiv) {
+function AppManager(paletteDiv, poemDiv, submittedPoemsDiv) {
   this.paletteDiv = paletteDiv;
   this.poemDiv = poemDiv;
+  this.submittedPoemsDiv = submittedPoemsDiv;
 }
 
 AppManager.prototype.addWord = function (button) {
@@ -46,7 +47,7 @@ AppManager.prototype.generatePalette = function (wordArray) {
 AppManager.prototype.submitPoem = function () {
   // to-do: validate poem (enough words, rows, etc)
   let encodedPoem = "";
-  const poemRows = [...document.getElementsByClassName("poem-row")];
+  const poemRows = [...this.poemDiv.getElementsByClassName("poem-row")];
 
   poemRows.forEach(row => {
     encodedPoem += `<${row.style.marginLeft.replace("rem", "")}>`;
@@ -58,22 +59,34 @@ AppManager.prototype.submitPoem = function () {
       const height = child.style.transform
         .match(/(?<=\()[^\(\)]+(?=\))/)[0]
         .replace("%", "");
-      const word = child
-        .querySelector("button")
-        .getAttribute("data-word");
+      const word = child.querySelector("button").getAttribute("data-word");
       encodedPoem += `{${connector};${height};${word}}`;
     });
   });
 
-  console.log(encodedPoem);
-  /*   fetch("/api", {
+  fetch("/api", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ poem: poemString }),
+    body: JSON.stringify({ input: encodedPoem }),
   }).then(() => {
     window.location.href = "/";
-  }); */
+  });
 };
 
-module.exports.create = (paletteDiv, poemDiv) =>
-  new AppManager(paletteDiv, poemDiv);
+AppManager.prototype.renderSubmittedPoems = function () {
+  [...this.submittedPoemsDiv.children].forEach(child => {
+    this.submittedPoemsDiv.removeChild(child);
+  });
+
+  fetch("/api")
+    .then(data => data.json())
+    .then(json => {
+      json.forEach(poem => {
+        const renderedPoem = make.submittedPoem(poem);
+        this.submittedPoemsDiv.appendChild(renderedPoem);
+      });
+    });
+};
+
+module.exports.create = (paletteDiv, poemDiv, submittedPoemsDiv) =>
+  new AppManager(paletteDiv, poemDiv, submittedPoemsDiv);

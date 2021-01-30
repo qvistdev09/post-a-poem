@@ -42,6 +42,63 @@ const make = {
     newRow.style.marginLeft = `${helpers.randomize(5, 0)}rem`;
     return newRow;
   },
+  submittedPoem: parsedPoemObj => {
+    // container
+    const container = document.createElement("div");
+    container.setAttribute("class", "submitted-poem-container");
+
+    // label
+    const label = document.createElement("h3");
+    label.setAttribute("class", "label");
+    const dateObj = new Date(parsedPoemObj.created);
+    const formattedDate =
+      dateObj.getDate() +
+      "-" +
+      (dateObj.getMonth() + 1) +
+      "-" +
+      dateObj.getFullYear() +
+      " " +
+      dateObj.getHours() +
+      ":" +
+      dateObj.getMinutes();
+    label.textContent = formattedDate;
+    container.appendChild(label);
+
+    // labelled container
+    const labelledContainer = document.createElement("div");
+    labelledContainer.setAttribute("class", "labelled-container");
+    container.appendChild(labelledContainer);
+
+    // rows
+    parsedPoemObj.rows.forEach(row => {
+      const rowDiv = document.createElement("div");
+      rowDiv.setAttribute("class", "poem-row");
+      rowDiv.style.marginLeft = `${row.margin}rem`;
+      row.words.forEach(word => {
+        // word container
+        const wordDiv = document.createElement("div");
+        wordDiv.setAttribute("class", "word-div");
+        wordDiv.style.transform = `translateY(${word.height}%)`;
+
+        // connector
+        const connector = document.createElement("div");
+        connector.setAttribute("class", "connector-div");
+        connector.style.width = `${word.connector}rem`;
+        wordDiv.appendChild(connector);
+
+        // p element with poem word
+        const wordParagraph = document.createElement("p");
+        wordParagraph.setAttribute("class", "poem-word");
+        wordParagraph.textContent = word.word;
+        wordDiv.appendChild(wordParagraph);
+
+        // append into row
+        rowDiv.appendChild(wordDiv);
+      });
+      labelledContainer.appendChild(rowDiv);
+    });
+    return container;
+  },
 };
 
 module.exports.make = make;
