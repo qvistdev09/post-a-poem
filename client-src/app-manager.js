@@ -44,19 +44,35 @@ AppManager.prototype.generatePalette = function (wordArray) {
 };
 
 AppManager.prototype.submitPoem = function () {
-  const wordArray = [];
-  for (let poemWord of document.getElementsByClassName("poem-word")) {
-    wordArray.push(poemWord.innerText);
-  }
-  const poemString = wordArray.join(" ");
+  // to-do: validate poem (enough words, rows, etc)
+  let encodedPoem = "";
+  const poemRows = [...document.getElementsByClassName("poem-row")];
 
-  fetch("/", {
+  poemRows.forEach(row => {
+    encodedPoem += `<${row.style.marginLeft.replace("rem", "")}>`;
+
+    [...row.children].forEach(child => {
+      const connector = child
+        .querySelector(".connector-div")
+        .style.width.replace("rem", "");
+      const height = child.style.transform
+        .match(/(?<=\()[^\(\)]+(?=\))/)[0]
+        .replace("%", "");
+      const word = child
+        .querySelector("button")
+        .getAttribute("data-word");
+      encodedPoem += `{${connector};${height};${word}}`;
+    });
+  });
+
+  console.log(encodedPoem);
+  /*   fetch("/api", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ poem: poemString }),
   }).then(() => {
     window.location.href = "/";
-  });
+  }); */
 };
 
 module.exports.create = (paletteDiv, poemDiv) =>
