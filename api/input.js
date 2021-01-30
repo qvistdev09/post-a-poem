@@ -1,4 +1,10 @@
-const validationRegex = /^((<-{0,1}((0\.[0-9]+)|([1-9][0-9]*\.[0-9]+)|([1-9][0-9]*)|(0))>(\[-{0,1}((0\.[0-9]+)|([1-9][0-9]*\.[0-9]+)|([1-9][0-9]*)|(0));-{0,1}((0\.[0-9]+)|([1-9][0-9]*\.[0-9]+)|([1-9][0-9]*)|(0));[a-z]+\]){1,3})){1,4}$/;
+const okDigit = "(-{0,1}((0.[0-9]+)|([1-9][0-9]*.[0-9]+)|([1-9][0-9]*)|(0)))"; // refuse bad digits, e.g. "0.", "00", ".", "00.15".
+const okWord = "([a-z]+)";
+const dataBetweenAngles = /(?<=<)[^<>]+(?=>)/g;
+const dataBetweenCurly = /(?<={)[^{}]+(?=})/g;
+const validationRegex = new RegExp(
+  `^(<${okDigit}>({${okDigit};${okDigit};${okWord}}){1,3}){1,4}$`
+);
 
 const makeWordObject = string => {
   const split = string.split(";");
@@ -18,15 +24,13 @@ const validate = string => {
 };
 
 const parse = validatedString => {
-  const rowMargins = validatedString.match(/(?<=<)[^<>]+(?=>)/g);
-  console.log(rowMargins + "---rowmargins");
+  const rowMargins = validatedString.match(dataBetweenAngles);
+
   const rows = validatedString
     .split(/<[^<>]+>/)
     .filter(element => element !== "")
-    .map(encodedRow => encodedRow.match(/(?<=\[)[^\[\]]+(?=\])/g))
-    .map(array => array.map(makeWordObject));
-
-  console.log(rows);
+    .map(encodedRow => encodedRow.match(dataBetweenCurly))
+    .map(unparsedRow => unparsedRow.map(makeWordObject));
 
   if (rowMargins.length !== rows.length) {
     throw new Error(
