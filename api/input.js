@@ -23,10 +23,10 @@ const validate = string => {
   }
 };
 
-const parse = validatedString => {
-  const rowMargins = validatedString.match(dataBetweenAngles);
+const parse = databaseObj => {
+  const rowMargins = databaseObj.content.match(dataBetweenAngles);
 
-  const rows = validatedString
+  const rows = databaseObj.content
     .split(/<[^<>]+>/)
     .filter(element => element !== "")
     .map(encodedRow => encodedRow.match(dataBetweenCurly))
@@ -43,7 +43,7 @@ const parse = validatedString => {
     words: wordRow,
   }));
 
-  return { content: "Poem", rows: poemRows };
+  return { content: "Poem", created: databaseObj.created, rows: poemRows };
 };
 
 module.exports.parse = parse;

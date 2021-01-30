@@ -17,7 +17,9 @@ const get = (req, res) => {
   try {
     Poem.findAll().then(data => {
       try {
-        const parsedPoems = data.map(entry => entry.content).map(input.parse);
+        const parsedPoems = data
+          .map(entry => ({ content: entry.content, created: entry.createdAt }))
+          .map(input.parse);
         res.json(parsedPoems);
       } catch (err) {
         res.json({ error: err.message });
