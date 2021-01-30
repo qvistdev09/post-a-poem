@@ -3,14 +3,18 @@ const express = require("express");
 const bodyParser = require("body-parser");
 
 const database = require("./database");
-const { Poem } = database.models;
+const { Poem, Word } = database.models;
 
-const sampleData = require("./sample-data/sample-poems.json");
+const samplePoems = require("./sample-data/sample-poems.json");
+const sampleWords = require("./sample-data/sample-words.json");
 
 (async () => {
   await database.sequelize.sync({ force: true });
-  sampleData.forEach(async entry => {
+  samplePoems.forEach(async entry => {
     await Poem.create({ content: entry });
+  });
+  sampleWords.forEach(async entry => {
+    await Word.create({ content: entry });
   });
 })();
 
