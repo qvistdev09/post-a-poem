@@ -61,7 +61,9 @@ const make = {
       dateObj.getHours() +
       ":" +
       dateObj.getMinutes();
-    label.textContent = formattedDate;
+    const span = document.createElement('span');
+    span.textContent = formattedDate;
+    label.appendChild(span);
     container.appendChild(label);
 
     // labelled container

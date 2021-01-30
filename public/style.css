@@ -30,6 +30,20 @@ h2.label {
   transform: translateY(50%);
 }
 
+h3.label {
+  font-weight: 400;
+  font-size: 0.9rem;
+  margin-left: 4%;
+  transform: translateY(50%);
+}
+
+h3.label span {
+  padding: 0 0.4rem;
+  font-size: 0.8rem;
+  color: rgb(75, 75, 75);
+  background-color: white;
+}
+
 h2.label span {
   padding: 0 0.4rem;
   background-color: white;
@@ -37,6 +51,7 @@ h2.label span {
 
 #root {
   padding: 0.5rem;
+  padding-bottom: 2rem;
   max-width: 50rem;
 }
 
@@ -88,6 +103,7 @@ button {
 }
 
 .poem-word {
+  font-size: 0.8rem;
   border: none;
   position: relative;
   background-color: transparent;
@@ -123,4 +139,16 @@ button {
   padding: 1rem;
   border: 1px solid gray;
   border-radius: 0.5rem;
+}
+
+.submitted-poem-container > .labelled-container {
+  padding: 1.7rem;
+}
+
+.submitted-poem-container + .submitted-poem-container {
+  margin-top: 1.7rem;
+}
+
+#submitted-poems {
+  padding: 2rem 1.5rem;
 }

@@ -15,7 +15,7 @@ const post = (req, res) => {
 
 const get = (req, res) => {
   try {
-    Poem.findAll().then(data => {
+    Poem.findAll({ order: [["createdAt", "DESC"]] }).then(data => {
       try {
         const parsedPoems = data
           .map(entry => ({ content: entry.content, created: entry.createdAt }))
