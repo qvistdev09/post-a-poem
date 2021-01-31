@@ -1,6 +1,6 @@
-const api = require("./api/api");
 const express = require("express");
 const bodyParser = require("body-parser");
+const api = require('./api');
 
 const database = require("./database");
 const { Poem, Word } = database.models;
@@ -19,16 +19,15 @@ const sampleWords = require("./sample-data/sample-words.json");
 })();
 
 const app = express();
-app.use(bodyParser.json());
 app.set("view engine", "pug");
+app.use(bodyParser.json());
 app.use(express.static("public"));
+
+app.use(/^\/api/, api);
 
 app.get("/", (req, res) => {
   res.render("index");
 });
-
-app.post("/api", api.post);
-app.get("/api", api.get);
 
 app.listen(3000, () => {
   console.log("The server is running");

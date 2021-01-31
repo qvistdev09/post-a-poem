@@ -38,10 +38,18 @@ AppManager.prototype.removeWord = function (button) {
 };
 
 AppManager.prototype.generatePalette = function (wordArray) {
-  for (let word of wordArray) {
-    const paletteBtn = make.poemPaletteBtn(word);
-    this.paletteDiv.appendChild(paletteBtn);
-  }
+  [...this.paletteDiv.children].forEach(child => {
+    this.paletteDiv.removeChild(child);
+  });
+
+  fetch("/api/words")
+    .then(data => data.json())
+    .then(json => {
+      for (let word of json) {
+        const paletteBtn = make.poemPaletteBtn(word);
+        this.paletteDiv.appendChild(paletteBtn);
+      }
+    });
 };
 
 AppManager.prototype.submitPoem = function () {
@@ -64,7 +72,7 @@ AppManager.prototype.submitPoem = function () {
     });
   });
 
-  fetch("/api", {
+  fetch("/api/submit", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ input: encodedPoem }),
@@ -78,7 +86,7 @@ AppManager.prototype.renderSubmittedPoems = function () {
     this.submittedPoemsDiv.removeChild(child);
   });
 
-  fetch("/api")
+  fetch("/api/poems")
     .then(data => data.json())
     .then(json => {
       json.forEach(poem => {
