@@ -1,5 +1,5 @@
-const get = require("./methods/get");
-const post = require("./methods/post");
+const get = require("./http-methods/get");
+const post = require("./http-methods/post");
 
 const api = (req, res, next) => {
   const { path } = req;
