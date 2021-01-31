@@ -1,4 +1,4 @@
-const apiFunctions = require("../functions");
+const parse = require('../functions/parse');
 const database = require("../../database");
 const { Poem, Word } = database.models;
 
@@ -12,7 +12,7 @@ const get = {
               content: entry.content,
               created: entry.createdAt,
             }))
-            .map(apiFunctions.parse);
+            .map(parse.encodedPoemToJSON);
           res.json(parsedPoems);
         } catch (err) {
           res.json({ error: err.message });
