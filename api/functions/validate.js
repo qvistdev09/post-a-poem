@@ -1,5 +1,5 @@
-const okDigit = "(-{0,1}((0.[0-9]+)|([1-9][0-9]*.[0-9]+)|([1-9][0-9]*)|(0)))"; // refuse bad digits, e.g. "0.", "00", ".", "00.15".
-const okWord = "([a-z]+)";
+const okDigit = '(-{0,1}((0.[0-9]+)|([1-9][0-9]*.[0-9]+)|([1-9][0-9]*)|(0)))'; // refuse bad digits, e.g. "0.", "00", ".", "00.15".
+const okWord = '([a-z]+)';
 const wordExtractorRegex = /(?<=;)[a-z]+(?=})/g;
 const validationRegex = new RegExp(
   `^(<${okDigit}>({${okDigit};${okDigit};${okWord}}){1,3}){1,4}$`
@@ -8,7 +8,7 @@ const validationRegex = new RegExp(
 const wordAllowed = (table, word, resolve, reject) => {
   table.findOne({ where: { content: word } }).then(token => {
     if (token === null) {
-      reject(new Error("Word not allowed"));
+      reject(new Error('Word not allowed'));
     } else {
       resolve(word);
     }
@@ -19,7 +19,7 @@ const format = string => {
   if (validationRegex.test(string)) {
     return string;
   } else {
-    throw new Error("Invalid poem format");
+    throw new Error('Invalid poem format');
   }
 };
 
@@ -29,7 +29,7 @@ const wordCount = validatedString => {
   if (extractedWords >= requiredWords) {
     return validatedString;
   } else {
-    throw new Error("Poem has too few words");
+    throw new Error('Poem has too few words');
   }
 };
 
@@ -50,7 +50,7 @@ const allWordsAllowed = (
       onValidCallback(values);
     })
     .catch(() => {
-      errorHandler(new Error("Foreign words in poem"));
+      errorHandler(new Error('Foreign words in poem'));
     });
 };
 
