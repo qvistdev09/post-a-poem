@@ -72,7 +72,7 @@ AppManager.prototype.submitPoem = function () {
     });
   });
 
-  fetch("/api/submit", {
+  fetch("/api/poems", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ input: encodedPoem }),
