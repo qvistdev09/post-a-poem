@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const apiController = require('./api/api-controller');
 const devService = require('./dev-service');
+const sharedHtmlVariables = require('./shared/sharedHtmlVariables.json');
 
 devService.syncAndPopulate();
 
@@ -14,7 +15,7 @@ app.use(express.static("public"));
 app.use(/^\/api/, apiController);
 
 app.get("/", (req, res) => {
-  res.render("index");
+  res.render("index", {...sharedHtmlVariables});
 });
 
 app.listen(3000, () => {

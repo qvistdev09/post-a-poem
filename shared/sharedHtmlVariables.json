@@ -1,0 +1,29 @@
+{
+  "paletteBtn": {
+    "templateId": "palette-btn-template",
+    "class": "palette-btn"
+  },
+  "addedWordBtn": {
+    "templateId": "added-word-btn-template",
+    "containerDivClass": "added-word-btn-container-div",
+    "connectorDivClass": "connector-div",
+    "buttonClass": "added-word-btn",
+    "closeIconClass": "added-word-btn-close-icon"
+  },
+  "poemRow": {
+    "templateId": "poem-row-template",
+    "divClass": "poem-row-div"
+  },
+  "submittedPoemContainer": {
+    "templateId": "submitted-poem-container-template",
+    "divClass": "submitted-poem-container-div",
+    "h3Class": "label",
+    "innerDivClass": "labelled-container"
+  },
+  "submittedWordDiv": {
+    "templateId": "submitted-word-div-template",
+    "divClass": "submitted-word-div",
+    "connectorDivClass": "connector-div",
+    "innerParagraphClass": "submitted-word"
+  }
+}
