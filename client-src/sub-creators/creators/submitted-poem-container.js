@@ -1,9 +1,13 @@
+const { ModuleFilenameHelpers } = require("webpack");
+
+const helpers = require('../../app-helpers');
+
 module.exports = template => {
   const domTemplate = document.getElementById(template.templateId);
   return label => {
     const newClone = domTemplate.content.cloneNode(true);
     const span = newClone.querySelector(`.${template.h3Class} span`);
-    span.textContent = label;
+    helpers.addTextNode(span, label);
     return newClone;
   }
 }

@@ -12,7 +12,7 @@ app.set("view engine", "pug");
 app.use(bodyParser.json());
 app.use(express.static("public"));
 
-app.use(/^\/api/, apiController);
+app.use('/api/', apiController);
 
 app.get("/", (req, res) => {
   res.render("index", {...sharedHtmlVariables});

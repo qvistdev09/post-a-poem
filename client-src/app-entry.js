@@ -1,23 +1,29 @@
-const paletteDiv = document.getElementById("word-palette");
-const poemDiv = document.getElementById("composed-poem");
-const submittedPoemsDiv = document.getElementById("submitted-poems");
-const submitBtn = document.getElementById("submit-poem-btn");
+const wordPalette = document.getElementById('word-palette');
+const composedPoem = document.getElementById('composed-poem');
+const submittedPoems = document.getElementById('submitted-poems');
 
-const manager = require("./app-manager").create(
-  paletteDiv,
-  poemDiv,
-  submittedPoemsDiv
+const fetcher = require('./app-fetcher').create(
+  '/api/',
+  'words',
+  'poems',
+  'poems'
 );
 
-submitBtn.addEventListener("click", () => {
-  manager.submitPoem();
-});
+const templates = require('../shared/sharedHtmlVariables.json');
+const elementsMaker = require('./app-elements-maker').createElementsMaker(templates);
 
-manager.renderSubmittedPoems();
+// const clientService = require('./app-client-service').create(
+//   wordPalette,
+//   composedPoem,
+//   submittedPoems,
+//   fetcher,
+//   templates
+// );
 
-window.addWord = word => {
-  manager.addWord(word);
-};
-window.removeWord = word => {
-  manager.removeWord(word);
-};
+// const submitBtn = document.getElementById('submit-poem-btn');
+// submitBtn.addEventListener('click', () => {
+//   clientService.submitPoem();
+// });
+
+// clientService.generatePalette();
+// clientService.renderPoems();

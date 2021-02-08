@@ -7,19 +7,17 @@ module.exports = template => {
     const containerDiv = newClone.querySelector(
       `.${template.containerDivClass}`
     );
-    const randomHeight = helpers.randomize(-15, 15);
-    containerDiv.style.transform = `translateY(${randomHeight}%)`;
     const button = newClone.querySelector(`.${template.buttonClass}`);
+    const connectorDiv = newClone.querySelector(
+      `.${template.connectorDivClass}`
+    );
+    helpers.setRandomHeight(containerDiv, -15, 15);
     helpers.setSeveralAttributes(button, {
       id: word + template.suffix,
       'data-word': word,
     });
-    button.textContent = word;
-    const connectorWidth = helpers.randomize(4, 0.8);
-    const connectorDiv = newClone.querySelector(
-      `.${template.connectorDivClass}`
-    );
-    connectorDiv.style.width = `${connectorWidth}rem`;
+    helpers.addTextNode(button, word);
+    helpers.setRandomWidth(connectorDiv, 4, 0.8);
     return newClone;
   };
 };

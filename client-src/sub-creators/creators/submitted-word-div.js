@@ -1,3 +1,5 @@
+const helpers = require('../../app-helpers');
+
 module.exports = template => {
   const domTemplate = document.getElementById(template.templateId);
   return (word, connectorLength, height) => {
@@ -11,7 +13,7 @@ module.exports = template => {
     const paragraph = newClone.querySelector(
       `.${template.innerParagraphClass}`
     );
-    paragraph.textContent = word;
+    helpers.addTextNode(paragraph, word);
     return newClone;
   };
 };

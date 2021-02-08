@@ -16,8 +16,42 @@ const setSeveralAttributes = (element, attributesObject) => {
   });
 };
 
+const setRandomHeight = (element, min, max) => {
+  const randomizedHeight = randomInt(min, max);
+  element.style.transform = `translateY(${randomizedHeight}%)`;
+};
+
+const setRandomWidth = (element, max, floor) => {
+  const randomizedWidth = randomize(max, floor);
+  element.style.width = `${randomizedWidth}rem`;
+};
+
+const addTextNode = (element, string) => {
+  const textNode = document.createTextNode(string);
+  element.appendChild(textNode);
+};
+
+const formatDate = dateString => {
+  const dateObj = new Date(dateString);
+  const formattedDate =
+    dateObj.getDate() +
+    '-' +
+    (dateObj.getMonth() + 1) +
+    '-' +
+    dateObj.getFullYear() +
+    ' ' +
+    dateObj.getHours() +
+    ':' +
+    dateObj.getMinutes();
+    return formattedDate;
+};
+
 module.exports = {
   randomize,
   randomInt,
   setSeveralAttributes,
+  setRandomHeight,
+  addTextNode,
+  setRandomWidth,
+  formatDate,
 };

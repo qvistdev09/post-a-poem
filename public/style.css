@@ -75,11 +75,11 @@ h2.label span {
   margin-bottom: 1rem;
 }
 
-.poem-row {
+.poem-row-div {
   display: flex;
 }
 
-.poem-row + .poem-row {
+.poem-row-div + .poem-row-div {
   margin-top: 1.5rem;
 }
 
@@ -90,11 +90,11 @@ h2.label span {
   display: none;
 }
 
-.word-div {
+.submitted-word-div {
   display: flex;
 }
 
-.word-div + .word-div > .connector-div {
+.submitted-word-div + .submitted-word-div > .connector-div {
   display: block;
 }
 
@@ -102,7 +102,7 @@ button {
   padding: 0.2rem;
 }
 
-.poem-word {
+.added-word-btn {
   font-size: 0.8rem;
   border: none;
   position: relative;
@@ -112,7 +112,7 @@ button {
   padding: 0.35rem;
 }
 
-.close-icon {
+.added-word-btn-close-icon {
   display: none;
   position: absolute;
   background-color: white;
@@ -123,7 +123,7 @@ button {
   height: 100%;
 }
 
-.poem-word:hover .close-icon {
+.added-word-btn:hover .added-word-btn-close-icon {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -141,11 +141,11 @@ button {
   border-radius: 0.5rem;
 }
 
-.submitted-poem-container > .labelled-container {
+.submitted-poem-container-div > .labelled-container {
   padding: 1.7rem;
 }
 
-.submitted-poem-container + .submitted-poem-container {
+.submitted-poem-container-div + .submitted-poem-container-div {
   margin-top: 1.7rem;
 }
 
