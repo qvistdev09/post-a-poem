@@ -8,6 +8,6 @@ module.exports = {
     path: path.resolve(__dirname, 'public'),
   },
   optimization: {
-    minimize: false,
+    minimize: true,
   },
 };
