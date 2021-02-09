@@ -90,6 +90,14 @@ h2.label span {
   display: none;
 }
 
+.added-word-btn-container-div {
+  display: flex;
+}
+
+.added-word-btn-container-div + .added-word-btn-container-div > .connector-div {
+  display: block;
+}
+
 .submitted-word-div {
   display: flex;
 }
@@ -131,6 +139,7 @@ button {
   left: 0px;
   width: 100%;
   height: 100%;
+  pointer-events: none;
 }
 
 .added-word-btn:hover .added-word-btn-close-icon {

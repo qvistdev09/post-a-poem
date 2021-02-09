@@ -33,6 +33,7 @@ const addTextNode = (element, string) => {
 
 const formatDate = dateString => {
   const dateObj = new Date(dateString);
+  console.log(typeof dateObj.getMinutes());
   const formattedDate =
     dateObj.getDate() +
     '-' +
@@ -42,7 +43,7 @@ const formatDate = dateString => {
     ' ' +
     dateObj.getHours() +
     ':' +
-    dateObj.getMinutes();
+    (dateObj.getMinutes() < 10 ? `0${dateObj.getMinutes()}` : dateObj.getMinutes());
     return formattedDate;
 };
 

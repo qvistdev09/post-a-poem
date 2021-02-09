@@ -1,7 +1,3 @@
-const wordPalette = document.getElementById('word-palette');
-const composedPoem = document.getElementById('composed-poem');
-const submittedPoems = document.getElementById('submitted-poems');
-
 const fetcher = require('./app-fetcher').create(
   '/api/',
   'words',
@@ -12,17 +8,17 @@ const fetcher = require('./app-fetcher').create(
 const templates = require('../shared/sharedHtmlVariables.json');
 
 const clientService = require('./app-client-service').create(
-  wordPalette,
-  composedPoem,
-  submittedPoems,
+  'word-palette',
+  'composed-poem',
+  'submitted-poems',
   fetcher,
   templates
 );
 
-// const submitBtn = document.getElementById('submit-poem-btn');
-// submitBtn.addEventListener('click', () => {
-//   clientService.submitPoem();
-// });
+const submitBtn = document.getElementById('submit-poem-btn');
+submitBtn.addEventListener('click', () => {
+  clientService.submitPoem();
+});
 
 clientService.generatePalette();
 clientService.renderPoems();

@@ -8,12 +8,25 @@ class ClientService {
     fetcher,
     templates
   ) {
-    this.paletteDiv = paletteDiv;
-    this.composedPoemDiv = composedPoemDiv;
-    this.submittedPoemsDiv = submittedPoemsDiv;
+    this.paletteDiv = document.getElementById(paletteDiv);
+    this.composedPoemDiv = document.getElementById(composedPoemDiv);
+    this.submittedPoemsDiv = document.getElementById(submittedPoemsDiv);
     this.fetcher = fetcher;
     this.templates = templates;
     this.maker = createElementsMaker(templates);
+
+    this.paletteDiv.addEventListener('click', e => {
+      this.handleClick(e);
+    });
+
+    this.composedPoemDiv.addEventListener('click', e => {
+      this.handleClick(e);
+    });
+  }
+  clearContainer(element) {
+    [...element.children].forEach(child => {
+      element.removeChild(child);
+    });
   }
   handleClick(e) {
     const targetClass = e.target.getAttribute('class');
@@ -23,13 +36,8 @@ class ClientService {
       this.removeWord(e.target);
     }
   }
-  clearSubmittedPoems() {
-    [...this.submittedPoemsDiv.children].forEach(child => {
-      this.submittedPoemsDiv.removeChild(child);
-    });
-  }
   renderPoems() {
-    this.clearSubmittedPoems();
+    this.clearContainer(this.submittedPoemsDiv);
     this.fetcher.getPoems((err, data) => {
       if (err) {
         console.log('Error getting poems');
@@ -41,13 +49,8 @@ class ClientService {
       }
     });
   }
-  clearWordPalette() {
-    [...this.paletteDiv.children].forEach(child => {
-      this.paletteDiv.removeChild(child);
-    });
-  }
   generatePalette() {
-    this.clearWordPalette();
+    this.clearContainer(this.paletteDiv);
     this.fetcher.getWords((err, data) => {
       if (err) {
         console.log('Failed getting words');
@@ -84,14 +87,15 @@ class ClientService {
   submitPoem() {
     const encodedPoem = this.encodePoem();
     this.fetcher.submitPoem(encodedPoem, (err, data) => {
-      console.log('Poem submitted');
-      this.clearSubmittedPoems();
+      this.clearContainer(this.submittedPoemsDiv);
+      this.clearContainer(this.composedPoemDiv);
       this.renderPoems();
+      this.generatePalette();
     });
   }
   getAvailableRow() {
     const poemRows = this.composedPoemDiv.getElementsByClassName(
-      templates.poemRow.divClass
+      this.templates.poemRow.divClass
     );
     for (let row of poemRows) {
       if (row.children.length < 3) {
@@ -117,7 +121,7 @@ class ClientService {
       button.getAttribute('data-word') + this.templates.paletteBtn.suffix
     );
     correspondingAddButton.removeAttribute('disabled');
-    const currentRow = button.closest(`.${templates.poemRow.divClass}`);
+    const currentRow = button.closest(`.${this.templates.poemRow.divClass}`);
     if (currentRow.children.length === 1) {
       currentRow.parentElement.removeChild(currentRow);
     } else {
