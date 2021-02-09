@@ -31,9 +31,13 @@ class ClientService {
   renderPoems() {
     this.clearSubmittedPoems();
     this.fetcher.getPoems((err, data) => {
-      for (let poem of data) {
-        const newPoem = this.maker.submittedPoem(poem);
-        this.submittedPoemsDiv.appendChild(newPoem);
+      if (err) {
+        console.log('Error getting poems');
+      } else {
+        for (let poem of data) {
+          const newPoem = this.maker.submittedPoem(poem);
+          this.submittedPoemsDiv.appendChild(newPoem);
+        }
       }
     });
   }
@@ -45,9 +49,13 @@ class ClientService {
   generatePalette() {
     this.clearWordPalette();
     this.fetcher.getWords((err, data) => {
-      for (let word of data) {
-        const newPaletteBtn = this.maker.paletteBtn(word);
-        this.paletteDiv.appendChild(newPaletteBtn);
+      if (err) {
+        console.log('Failed getting words');
+      } else {
+        for (const word of data) {
+          const newPaletteBtn = this.maker.paletteBtn(word);
+          this.paletteDiv.appendChild(newPaletteBtn);
+        }
       }
     });
   }

@@ -8,7 +8,7 @@ module.exports = (containerMaker, rowMaker, wordMaker, templates) => obj => {
   );
   for (let row of obj.rows) {
     const newRow = rowMaker(row.margin);
-    for (let word of row) {
+    for (let word of row.words) {
       const newWord = wordMaker(word.word, word.connector, word.height);
       newRow.appendChild(newWord);
     }

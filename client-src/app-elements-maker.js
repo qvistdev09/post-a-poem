@@ -15,7 +15,8 @@ const createElementsMaker = sharedHtmlVariables => {
   const submittedPoem = subCreators.submittedPoem(
     submittedPoemContainer,
     poemRow,
-    submittedWordDiv
+    submittedWordDiv,
+    sharedHtmlVariables
   );
   return {
     addedWordBtn,

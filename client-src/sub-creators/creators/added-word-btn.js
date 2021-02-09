@@ -18,6 +18,6 @@ module.exports = template => {
     });
     helpers.addTextNode(button, word);
     helpers.setRandomWidth(connectorDiv, 4, 0.8);
-    return newClone;
+    return newClone.children[0];
   };
 };

@@ -112,6 +112,16 @@ button {
   padding: 0.35rem;
 }
 
+.submitted-word {
+  font-size: 0.8rem;
+  border: none;
+  position: relative;
+  background-color: transparent;
+  border: 1px solid gray;
+  border-radius: 0.35rem;
+  padding: 0.35rem;
+}
+
 .added-word-btn-close-icon {
   display: none;
   position: absolute;

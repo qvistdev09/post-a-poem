@@ -14,6 +14,6 @@ module.exports = template => {
       `.${template.innerParagraphClass}`
     );
     helpers.addTextNode(paragraph, word);
-    return newClone;
+    return newClone.children[0];
   };
 };

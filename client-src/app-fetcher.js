@@ -19,7 +19,15 @@ class Fetcher {
     this.genericFetch(this.words, callback);
   }
   getPoems(callback) {
-    this.genericFetch(this.poems, callback);
+    fetch(this.poems)
+    .then(res => res.json())
+    .then(data => {
+      callback(null, data);
+    })
+    .catch(error => {
+      throw error;
+      callback(error, null);
+    });
   }
   submitPoem(poem, callback) {
     fetch(this.submit, {

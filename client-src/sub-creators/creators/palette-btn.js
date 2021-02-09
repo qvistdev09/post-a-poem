@@ -6,10 +6,10 @@ module.exports = template => {
     const newClone = domTemplate.content.cloneNode(true);
     const button = newClone.querySelector(`.${template.class}`);
     helpers.addTextNode(button, word);
-    helpers.setSeveralAttributes({
+    helpers.setSeveralAttributes(button, {
       id: word + template.suffix,
       'data-word': word,
     });
-    return newClone;
+    return newClone.children[0];
   };
 };

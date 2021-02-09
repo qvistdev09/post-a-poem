@@ -10,20 +10,19 @@ const fetcher = require('./app-fetcher').create(
 );
 
 const templates = require('../shared/sharedHtmlVariables.json');
-const elementsMaker = require('./app-elements-maker').createElementsMaker(templates);
 
-// const clientService = require('./app-client-service').create(
-//   wordPalette,
-//   composedPoem,
-//   submittedPoems,
-//   fetcher,
-//   templates
-// );
+const clientService = require('./app-client-service').create(
+  wordPalette,
+  composedPoem,
+  submittedPoems,
+  fetcher,
+  templates
+);
 
 // const submitBtn = document.getElementById('submit-poem-btn');
 // submitBtn.addEventListener('click', () => {
 //   clientService.submitPoem();
 // });
 
-// clientService.generatePalette();
-// clientService.renderPoems();
+clientService.generatePalette();
+clientService.renderPoems();

@@ -7,6 +7,6 @@ module.exports = template => {
     const newClone = domTemplate.content.cloneNode(true);
     const div = newClone.querySelector(`.${template.divClass}`);
     div.style.marginLeft = `${rowMargin}rem`;
-    return newClone;
+    return newClone.children[0];
   };
 };
