@@ -33,7 +33,6 @@ const addTextNode = (element, string) => {
 
 const formatDate = dateString => {
   const dateObj = new Date(dateString);
-  console.log(typeof dateObj.getMinutes());
   const formattedDate =
     dateObj.getDate() +
     '-' +

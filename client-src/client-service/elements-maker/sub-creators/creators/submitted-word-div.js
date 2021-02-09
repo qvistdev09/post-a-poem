@@ -1,4 +1,4 @@
-const helpers = require('../../app-helpers');
+const domActions = require('./helpers/dom-actions');
 
 module.exports = template => {
   const domTemplate = document.getElementById(template.templateId);
@@ -13,7 +13,7 @@ module.exports = template => {
     const paragraph = newClone.querySelector(
       `.${template.innerParagraphClass}`
     );
-    helpers.addTextNode(paragraph, word);
+    domActions.addTextNode(paragraph, word);
     return newClone.children[0];
   };
 };

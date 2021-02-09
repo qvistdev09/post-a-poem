@@ -1,4 +1,4 @@
-const subCreators = require('./sub-creators/index');
+const subCreators = require('./sub-creators');
 
 const createElementsMaker = sharedHtmlVariables => {
   const addedWordBtn = subCreators.addedWordBtn(

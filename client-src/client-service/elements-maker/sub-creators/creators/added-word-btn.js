@@ -1,4 +1,4 @@
-const helpers = require('../../app-helpers');
+const domActions = require('./helpers/dom-actions');
 
 module.exports = template => {
   const domTemplate = document.getElementById(template.templateId);
@@ -11,13 +11,13 @@ module.exports = template => {
     const connectorDiv = newClone.querySelector(
       `.${template.connectorDivClass}`
     );
-    helpers.setRandomHeight(containerDiv, -15, 15);
-    helpers.setSeveralAttributes(button, {
+    domActions.setRandomHeight(containerDiv, -15, 15);
+    domActions.setSeveralAttributes(button, {
       id: word + template.suffix,
       'data-word': word,
     });
-    helpers.addTextNode(button, word);
-    helpers.setRandomWidth(connectorDiv, 4, 0.8);
+    domActions.addTextNode(button, word);
+    domActions.setRandomWidth(connectorDiv, 4, 0.8);
     return newClone.children[0];
   };
 };

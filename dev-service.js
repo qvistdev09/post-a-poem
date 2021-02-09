@@ -5,7 +5,7 @@ const samplePoems = require('./sample-data/sample-poems.json');
 const sampleWords = require('./sample-data/sample-words.json');
 
 const syncAndPopulate = async () => {
-  await database.sequelize.sync({ alter: true });
+  await database.sequelize.sync({ force: true });
   samplePoems.forEach(async entry => {
     await Poem.create({ content: entry });
   });

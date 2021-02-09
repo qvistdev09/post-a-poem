@@ -1,7 +1,7 @@
-const helpers = require('../../app-helpers');
+const domActions = require('./helpers/dom-actions');
 
 module.exports = (containerMaker, rowMaker, wordMaker, templates) => obj => {
-  const formattedDate = helpers.formatDate(obj.created);
+  const formattedDate = domActions.formatDate(obj.created);
   const entirePoemContainer = containerMaker(formattedDate);
   const rowsContainer = entirePoemContainer.querySelector(
     `.${templates.submittedPoemContainer.innerDivClass}`

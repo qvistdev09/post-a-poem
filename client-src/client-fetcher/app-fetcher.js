@@ -1,9 +1,9 @@
 class Fetcher {
-  constructor(basepath, words, poems, submit) {
+  constructor(basepath, words, poems) {
     this.words = basepath + words;
     this.poems = basepath + poems;
-    this.submit = basepath + submit;
   }
+
   genericFetch(path, callback) {
     fetch(path)
       .then(res => res.json())
@@ -18,19 +18,13 @@ class Fetcher {
   getWords(callback) {
     this.genericFetch(this.words, callback);
   }
+
   getPoems(callback) {
-    fetch(this.poems)
-    .then(res => res.json())
-    .then(data => {
-      callback(null, data);
-    })
-    .catch(error => {
-      throw error;
-      callback(error, null);
-    });
+    this.genericFetch(this.poems, callback);
   }
+
   submitPoem(poem, callback) {
-    fetch(this.submit, {
+    fetch(this.poems, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ input: poem }),
@@ -45,5 +39,5 @@ class Fetcher {
   }
 }
 
-module.exports.create = (basepath, words, poems, submit) =>
-  new Fetcher(basepath, words, poems, submit);
+module.exports.create = (basepath, words, poems) =>
+  new Fetcher(basepath, words, poems);

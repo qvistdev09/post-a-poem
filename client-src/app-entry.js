@@ -1,13 +1,12 @@
-const fetcher = require('./app-fetcher').create(
+const fetcher = require('./client-fetcher/app-fetcher').create(
   '/api/',
   'words',
   'poems',
-  'poems'
 );
 
 const templates = require('../shared/sharedHtmlVariables.json');
 
-const clientService = require('./app-client-service').create(
+const clientService = require('./client-service/app-client-service').create(
   'word-palette',
   'composed-poem',
   'submitted-poems',

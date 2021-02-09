@@ -1,4 +1,4 @@
-const { createElementsMaker } = require('./app-elements-maker');
+const { createElementsMaker } = require('./elements-maker/app-elements-maker');
 
 class ClientService {
   constructor(
@@ -28,6 +28,7 @@ class ClientService {
       element.removeChild(child);
     });
   }
+
   handleClick(e) {
     const targetClass = e.target.getAttribute('class');
     if (targetClass === this.templates.paletteBtn.class) {
@@ -36,6 +37,7 @@ class ClientService {
       this.removeWord(e.target);
     }
   }
+
   renderPoems() {
     this.clearContainer(this.submittedPoemsDiv);
     this.fetcher.getPoems((err, data) => {
@@ -49,6 +51,7 @@ class ClientService {
       }
     });
   }
+
   generatePalette() {
     this.clearContainer(this.paletteDiv);
     this.fetcher.getWords((err, data) => {
@@ -62,6 +65,7 @@ class ClientService {
       }
     });
   }
+
   encodePoem() {
     let encodedPoem = '';
     const poemRows = [
@@ -84,6 +88,7 @@ class ClientService {
     });
     return encodedPoem;
   }
+
   submitPoem() {
     const encodedPoem = this.encodePoem();
     this.fetcher.submitPoem(encodedPoem, (err, data) => {
@@ -93,6 +98,7 @@ class ClientService {
       this.generatePalette();
     });
   }
+
   getAvailableRow() {
     const poemRows = this.composedPoemDiv.getElementsByClassName(
       this.templates.poemRow.divClass
@@ -104,6 +110,7 @@ class ClientService {
     }
     return null;
   }
+
   addWord(button) {
     button.setAttribute('disabled', 'true');
     const addedWord = this.maker.addedWordBtn(button.textContent);
@@ -116,6 +123,7 @@ class ClientService {
       this.composedPoemDiv.appendChild(newRow);
     }
   }
+
   removeWord(button) {
     const correspondingAddButton = document.getElementById(
       button.getAttribute('data-word') + this.templates.paletteBtn.suffix
@@ -128,6 +136,7 @@ class ClientService {
       currentRow.removeChild(button.parentElement);
     }
   }
+  
 }
 
 module.exports.create = (
