@@ -1,4 +1,4 @@
-const domActions = require('./helpers/dom-actions');
+const domActions = require('./dom-actions');
 
 module.exports = template => {
   const domTemplate = document.getElementById(template.templateId);

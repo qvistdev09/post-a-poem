@@ -1,17 +1,16 @@
-const fetcher = require('./client-fetcher/app-fetcher').create(
-  '/api/',
-  'words',
-  'poems',
-);
+const templatesInfo = require('../shared/sharedHtmlVariables.json');
 
-const templates = require('../shared/sharedHtmlVariables.json');
+const fetcher = require('./client-fetcher/').create('/api/', 'words', 'poems');
 
-const clientService = require('./client-service/app-client-service').create(
+const elementsMaker = require('./elements-maker').create(templatesInfo);
+
+const clientService = require('./client-service/').create(
   'word-palette',
   'composed-poem',
   'submitted-poems',
   fetcher,
-  templates
+  templatesInfo,
+  elementsMaker
 );
 
 const submitBtn = document.getElementById('submit-poem-btn');
@@ -21,3 +20,4 @@ submitBtn.addEventListener('click', () => {
 
 clientService.generatePalette();
 clientService.renderPoems();
+clientService.connectListeners();

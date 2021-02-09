@@ -1,4 +1,4 @@
-const domActions = require('./helpers/dom-actions');
+const domActions = require('./dom-actions');
 
 module.exports = (containerMaker, rowMaker, wordMaker, templates) => obj => {
   const formattedDate = domActions.formatDate(obj.created);

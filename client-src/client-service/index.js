@@ -1,20 +1,14 @@
-const { createElementsMaker } = require('./elements-maker/app-elements-maker');
-
 class ClientService {
-  constructor(
-    paletteDiv,
-    composedPoemDiv,
-    submittedPoemsDiv,
-    fetcher,
-    templates
-  ) {
+  constructor(paletteDiv, composedPoemDiv, submittedPoemsDiv, fetcher, templates, maker) {
     this.paletteDiv = document.getElementById(paletteDiv);
     this.composedPoemDiv = document.getElementById(composedPoemDiv);
     this.submittedPoemsDiv = document.getElementById(submittedPoemsDiv);
     this.fetcher = fetcher;
     this.templates = templates;
-    this.maker = createElementsMaker(templates);
-
+    this.maker = maker;
+  }
+  
+  connectListeners() {
     this.paletteDiv.addEventListener('click', e => {
       this.handleClick(e);
     });
@@ -23,6 +17,7 @@ class ClientService {
       this.handleClick(e);
     });
   }
+
   clearContainer(element) {
     [...element.children].forEach(child => {
       element.removeChild(child);
@@ -68,20 +63,14 @@ class ClientService {
 
   encodePoem() {
     let encodedPoem = '';
-    const poemRows = [
-      ...this.composedPoemDiv.getElementsByClassName(
-        this.templates.poemRow.divClass
-      ),
-    ];
+    const poemRows = [...this.composedPoemDiv.getElementsByClassName(this.templates.poemRow.divClass)];
     poemRows.forEach(row => {
       encodedPoem += `<${row.style.marginLeft.replace('rem', '')}>`;
       [...row.children].forEach(child => {
         const connector = child
           .querySelector(`.${this.templates.addedWordBtn.connectorDivClass}`)
           .style.width.replace('rem', '');
-        const height = child.style.transform
-          .match(/(?<=\()[^\(\)]+(?=\))/)[0]
-          .replace('%', '');
+        const height = child.style.transform.match(/(?<=\()[^\(\)]+(?=\))/)[0].replace('%', '');
         const word = child.querySelector('button').getAttribute('data-word');
         encodedPoem += `{${connector};${height};${word}}`;
       });
@@ -100,9 +89,7 @@ class ClientService {
   }
 
   getAvailableRow() {
-    const poemRows = this.composedPoemDiv.getElementsByClassName(
-      this.templates.poemRow.divClass
-    );
+    const poemRows = this.composedPoemDiv.getElementsByClassName(this.templates.poemRow.divClass);
     for (let row of poemRows) {
       if (row.children.length < 3) {
         return row;
@@ -136,20 +123,7 @@ class ClientService {
       currentRow.removeChild(button.parentElement);
     }
   }
-  
 }
 
-module.exports.create = (
-  paletteDiv,
-  composedPoemDiv,
-  submittedPoemsDiv,
-  fetcher,
-  templates
-) =>
-  new ClientService(
-    paletteDiv,
-    composedPoemDiv,
-    submittedPoemsDiv,
-    fetcher,
-    templates
-  );
+module.exports.create = (paletteDiv, composedPoemDiv, submittedPoemsDiv, fetcher, templates, maker) =>
+  new ClientService(paletteDiv, composedPoemDiv, submittedPoemsDiv, fetcher, templates, maker);
