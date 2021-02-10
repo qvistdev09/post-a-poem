@@ -10,14 +10,14 @@ html(lang="en")
             h1 10 word poem maker
             h2(class="label")
                 span Word Palette
-            div(id="word-palette" class="labelled-container")
+            div(id= containerIdentifiers.wordPalette class="labelled-container")
             h2(class="label")
                 span Your Poem
-            div(id="composed-poem" class="labelled-container")
+            div(id= containerIdentifiers.composedPoem class="labelled-container")
             button(id="submit-poem-btn") Submit poem
             h2(class="label")
                 span Submitted Poems
-            div(id="submitted-poems" class="labelled-container")
+            div(id= containerIdentifiers.submittedPoems class="labelled-container")
         include templates/paletteBtn.pug
         include templates/addedWordBtn.pug
         include templates/poemRow.pug

@@ -27,5 +27,10 @@
     "divClass": "submitted-word-div",
     "connectorDivClass": "connector-div",
     "innerParagraphClass": "submitted-word"
+  },
+  "containerIdentifiers": {
+    "wordPalette": "word-palette",
+    "composedPoem": "composed-poem",
+    "submittedPoems": "submitted-poems"
   }
 }
