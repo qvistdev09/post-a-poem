@@ -3,6 +3,9 @@ const bodyParser = require("body-parser");
 const apiController = require('./api/api-controller');
 const devService = require('./dev-service');
 const sharedHtmlVariables = require('./shared/sharedHtmlVariables.json');
+const compileCss = require('./css-compiler');
+
+compileCss();
 
 devService.syncAndPopulate();
 

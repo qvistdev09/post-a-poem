@@ -109,3 +109,6 @@ dist
 # Compiled javascript
 public/main.js
 
+# Compiled css
+public/compiled-style.css
+

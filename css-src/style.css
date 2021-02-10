@@ -75,34 +75,34 @@ h2.label span {
   margin-bottom: 1rem;
 }
 
-.poem-row-div {
+.poemRow-divClass {
   display: flex;
 }
 
-.poem-row-div + .poem-row-div {
+.poemRow-divClass + .poemRow-divClass {
   margin-top: 1.5rem;
 }
 
-.connector-div {
+.addedWordBtn-connectorDivClass {
   width: 2rem;
   border-bottom: 1px solid gray;
   transform: translateY(-50%);
   display: none;
 }
 
-.added-word-btn-container-div {
+.addedWordBtn-containerDivClass {
   display: flex;
 }
 
-.added-word-btn-container-div + .added-word-btn-container-div > .connector-div {
+.addedWordBtn-containerDivClass + .addedWordBtn-containerDivClass > .addedWordBtn-connectorDivClass {
   display: block;
 }
 
-.submitted-word-div {
+.submittedWordDiv-divClass {
   display: flex;
 }
 
-.submitted-word-div + .submitted-word-div > .connector-div {
+.submittedWordDiv-divClass + .submittedWordDiv-divClass > .submittedWordDiv-connectorDivClass {
   display: block;
 }
 
@@ -110,7 +110,7 @@ button {
   padding: 0.2rem;
 }
 
-.added-word-btn {
+.addedWordBtn-buttonClass {
   font-size: 0.8rem;
   border: none;
   position: relative;
@@ -120,7 +120,7 @@ button {
   padding: 0.35rem;
 }
 
-.submitted-word {
+.submittedWordDiv-innerParagraphClass {
   font-size: 0.8rem;
   border: none;
   position: relative;
@@ -130,7 +130,7 @@ button {
   padding: 0.35rem;
 }
 
-.added-word-btn-close-icon {
+.addedWordBtn-closeIconClass {
   display: none;
   position: absolute;
   background-color: white;
@@ -142,29 +142,29 @@ button {
   pointer-events: none;
 }
 
-.added-word-btn:hover .added-word-btn-close-icon {
+.addedWordBtn-buttonClass:hover .addedWordBtn-closeIconClass {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.palette-btn {
+.paletteBtn-class {
   margin: 0.4rem;
   border: 1px solid black;
   border-radius: 0.25rem;
 }
 
-.labelled-container {
+.submittedPoemContainer-innerDivClass {
   padding: 1rem;
   border: 1px solid gray;
   border-radius: 0.5rem;
 }
 
-.submitted-poem-container-div > .labelled-container {
+.submittedPoemContainer-divClass > .submittedPoemContainer-innerDivClass {
   padding: 1.7rem;
 }
 
-.submitted-poem-container-div + .submitted-poem-container-div {
+.submittedPoemContainer-divClass + .submittedPoemContainer-divClass {
   margin-top: 1.7rem;
 }
 
